@@ -1,0 +1,81 @@
+//@use '~@angular/material' as mat;
+//
+//$color-config:    mat.get-color-config(mat.$indigo-palette);
+//$primary-palette: map-get($color-config, 'primary');
+//$accent-palette:  map-get($color-config, 'accent');
+//$warn-palette:    map-get($color-config, 'warn');
+//$is-dark-theme:   map-get($color-config, 'is-dark');
+
+#overlay {
+  width: 1840px;
+  height: 1053px; // 1000 px + 45 for user view header + 8 for user's body padding
+}
+
+mat-card {
+  height: 100%;
+  width: 100%;
+  transform: scale(0.90);
+  padding: 0;
+  background: #f2f2f2;
+}
+
+mat-card.small {
+  transform: scale(0.2);
+}
+
+mat-card-title {
+  pointer-events: all;
+  cursor: move;
+  background: lightblue;
+
+  #buttons {
+    pointer-events: all;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
+    &.small {
+      top: 60px;
+      right: 60px;
+
+      button {
+        margin: 0 40px;
+      }
+    }
+
+    mat-icon.small {
+      font-size: 8em;
+    }
+  }
+
+
+  h3 {
+    padding: 0 3px;
+
+    &.small {
+      font-size: 4em;
+      padding-bottom: 60px;
+      padding-top: 60px;
+      margin-bottom: 30px;
+      padding-left: 15px;
+      //background: $indigo-palette;
+    }
+  }
+}
+
+svg {
+  position: absolute;
+  z-index: 99999;
+  pointer-events: all;
+  cursor: not-allowed;
+  left: 0;
+
+  &.large {
+    top: 37px;
+  }
+}
+
+mat-card-content {
+  pointer-events: none;
+  margin: 8px;
+}

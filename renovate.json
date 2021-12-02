@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": ["@sperrle"],
+  "assigneesSampleSize": 1,
+  "gitLabAutomerge": true,
+  "packageRules": [
+    {
+      "packagePatterns": ["^@angular"],
+      "groupName": "angular packages"
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "packagePatterns": ["eslint"],
+      "automerge": true,
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "eslint packages"
+    },
+    {
+      "updateTypes": ["lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "assignees": ["@sperrle"]
+  },
+  "dependencyDashboard": true,
+  "commitMessagePrefix": "[renovate-bot] ",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 5:00am"
+    ]
+  }
+}

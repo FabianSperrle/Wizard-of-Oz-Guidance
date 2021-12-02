@@ -1,0 +1,16 @@
+<div id="overlay">
+  <mat-card [ngClass]="{small: isSmall, large: !isSmall}">
+    <mat-card-title cdkDrag cdkDragRootElement="#overlay" cdkDragHandle [cdkDragFreeDragPosition]="currentDragPosition" (cdkDragEnded)="dragEnded($event)" >
+      <h3 [ngClass]="{small: isSmall}">User View</h3>
+      <span id="buttons" [ngClass]="{small: isSmall}">
+        <button mat-icon-button (click)="syncUserSettings()"><mat-icon [ngClass]="{small: isSmall}">sync</mat-icon></button>
+        <button mat-icon-button (click)="toggleSize()"><mat-icon [ngClass]="{small: isSmall}">{{ isSmall ? "fullscreen" : "close_fullscreen"}}</mat-icon></button>
+      </span>
+    </mat-card-title>
+    <mat-card-content>
+<!--      <router-outlet></router-outlet>-->
+      <svg [ngClass]="{small: isSmall, large: !isSmall}" #mouse style="border: 1px solid red" matTooltip="You cannot interact with the user view directly. "></svg>
+      <gs-weather-analysis [isOverlay]="true"></gs-weather-analysis>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,27 @@
+<ng-template #tt>
+  <h2>Time Selector Slider</h2>
+  <p>The time selector slider allows you to change what data is visualized in the scatter plot above. The selected month is also highlighted by the black bar in the line chart below.</p>
+  <p>Afforded Interactions:</p>
+  <ul>
+    <li><strong>Drag the slider</strong> to select a different month from the data.</li>
+  </ul>
+</ng-template>
+<div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center">
+  <div fxFlex="45%" style="position:relative;">
+    <strong>Selected Month: </strong>
+    <mat-slider style="width: 40%" #slider [min]="minMonth" [max]="maxMonth"  [value]="currMonth" (input)="updateYear($event)" (change)="slideComplete($event)"></mat-slider>
+    <span *ngIf="currYear != undefined">
+    {{ currYear?.toLocaleString('default', { month: 'long' }) }} {{ currYear?.getFullYear() }}
+    </span>
+    <gs-generic-visualization-buttons [showReset]="false" [template]="tt"></gs-generic-visualization-buttons>
+  </div>
+  <div fxFlex="52%">
+    <gs-suggestion-list [hideTitle]=true
+                        [suggestions]="suggestions"
+                        [newSuggestionActions]="[{action: 'timeslide', title: 'Suggest current month'}]" (newSuggestion)="handleNewSuggestion($event)"
+                        (actions)="processGuidance($event.suggestion, $event.action, userRole)" [userRole]="userRole" [horizontal]="true"></gs-suggestion-list>
+  </div>
+<!--  <div fxFlex="20%">-->
+<!--    <gs-dimpvis-suggestion-card *ngFor="let sugg of suggestions" [suggestion]="sugg" (feedback)="processGuidance(sugg, $event, userRole)" [role]="this.userRole"></gs-dimpvis-suggestion-card>-->
+<!--  </div>-->
+</div>

@@ -1,0 +1,40 @@
+<h3>Please select one of the existing study setups or create a new one.</h3>
+
+<div *ngFor="let channel of this.channels">
+  <span class="socketName">
+    {{channel.name}}
+  </span>
+  <button mat-button (click)="joinChannel(channel, 'user', 'training')">Training</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'training')">W</button>
+  <button mat-button (click)="joinChannel(channel, 'user', 'training2')">Training2</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'training2')">W2</button>
+  <button mat-button (click)="joinChannel(channel, 'user', 'blue')">U1 blue</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'blue')">W1 blue</button>
+  <button mat-button (click)="joinChannel(channel, 'user', 'orange')">U1 orange</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'orange')">W1 orange</button>
+  <button mat-button (click)="joinChannel(channel, 'user', 'purple')">U1 purple</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'purple')">W1 purple</button>
+  <button mat-button (click)="joinChannel(channel, 'user', 'yellow')">U1 yellow</button>
+  <button mat-button (click)="joinChannel(channel, 'wizard', 'yellow')">W1 yellow</button>
+<!--  <button mat-icon-button (click)="joinChannel(channel, 'overlay')"><mat-icon aria-hidden="false" aria-label="Example home icon">auto_fix_high</mat-icon><mat-icon aria-hidden="false" aria-label="Example home icon">auto_fix_high</mat-icon></button>-->
+  <button mat-icon-button (click)="deleteChannel(channel)"><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon></button>
+</div>
+
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Setup Name</mat-label>
+    <input matInput placeholder="Example Name" [formControl]="channelFormControl" [(ngModel)]="newChannel" name="newChannel" (keyup.enter)="channelFormControl.valid && this.registerChannel(newChannel)">
+    <mat-hint>Please enter the setup name specified by the study supervisor.</mat-hint>
+    <mat-error *ngIf="channelFormControl.hasError('minlength') && !channelFormControl.hasError('required')">
+      Your setup name must be 4 characters or more.
+    </mat-error>
+    <mat-error *ngIf="channelFormControl.hasError('required')">
+      Please enter a setup name.
+    </mat-error>
+    <mat-error *ngIf="channelFormControl.hasError('forbiddenName')">
+      A setup with this name exists already.
+    </mat-error>
+  </mat-form-field>
+
+    <button mat-button (click)="this.registerChannel(newChannel)" [disabled]="!channelFormControl.valid">Register Setup</button>
+</form>

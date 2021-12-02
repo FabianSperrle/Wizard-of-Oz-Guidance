@@ -1,0 +1,48 @@
+#suggestionPaneTitle {
+  position: relative;
+
+  #addSuggestion {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+
+    mat-icon {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.suggestions {
+  box-shadow: 0 1px 2px #00000033;
+  background: rgba(239, 239, 239, 0.3);
+  padding: 5px;
+  margin: 3px;
+  max-height: 90%;
+
+  &.vertical {
+    height: 100%;
+    margin-right: -2px;
+    height: 320px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &.horizontal {
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: 58px;
+    margin-top: 0;
+    white-space: nowrap;
+
+    gs-dimpvis-suggestion-card {
+      display: inline-block;
+    }
+    //width: 100%;
+  }
+}
+
+:host {
+  display: block;
+}

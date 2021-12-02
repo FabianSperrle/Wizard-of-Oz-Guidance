@@ -1,0 +1,24 @@
+<mat-card [ngClass]="{'preview': suggestion.preview}" (mouseenter)="feedback.emit('preview start')" (mouseleave)="feedback.emit('preview end')">
+  <mat-card-content *ngIf="suggestion.description">
+    {{ suggestion.description }}
+  </mat-card-content>
+  <mat-card-actions *ngIf="role === 'user' && suggestion.degree === 'directing'">
+    <button mat-button (click)="feedback.emit('preview start')">P</button>
+    <button mat-button (click)="feedback.emit('preview end')">E</button>
+    <button mat-button (click)="feedback.emit('accept')">Accept</button>
+    <button mat-button (click)="feedback.emit('reject')">Reject</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf="role === 'user' && suggestion.degree === 'orienting'">
+    <button mat-button (click)="feedback.emit('preview start')">P</button>
+    <button mat-button (click)="feedback.emit('preview end')">E</button>
+    <button mat-button (click)="feedback.emit('accept')">Accept</button>
+    <button mat-button (click)="feedback.emit('reject')">Reject and remove</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf="role === 'wizard'">
+    <button mat-button (click)="feedback.emit('preview start')">P</button>
+    <button mat-button (click)="feedback.emit('preview end')">E</button>
+    <button mat-button mat-ripple (click)="feedback.emit('retract')">Retract</button>
+    <span *ngIf="suggestion.linkedSuggestions?.length !== 0">Already Linked.</span>
+    <button *ngIf="showLinkButton(suggestion)" mat-button (click)="feedback.emit('link')">Link</button>
+  </mat-card-actions>
+</mat-card>

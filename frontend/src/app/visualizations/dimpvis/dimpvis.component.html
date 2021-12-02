@@ -1,0 +1,25 @@
+<ng-template #dt>
+  <h2>Scatter Plot</h2>
+  <p>This chart offers detailed information on your data and shows correlations between features.</p>
+  <p>Afforded Interactions:</p>
+  <ul>
+    <li><strong>Select x-axis, y-axis, and color scheme</strong> from dropdowns below</li>
+    <li><strong>Hover</strong> any of the lines to show additional information. The blue line shows the temporal development for the selected city.</li>
+    <li><strong>Click and drag</strong> to zoom or highlight data points. Select an empty region to remove highlights.</li>
+    <li><strong>Double-click</strong> anywhere to zoom out fully.</li>
+  </ul>
+</ng-template>
+<div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" style="height: 345px;">
+  <div fxFlex="78%" #svgContainer style="position:relative;">
+    <svg #dimpvis>
+      <filter id="blur"><feGaussianBlur stdDeviation="2"></feGaussianBlur></filter>
+      <filter id="lightblur"><feGaussianBlur stdDeviation="0.5"></feGaussianBlur></filter>
+      <g id="brush"></g>
+      <g id="circles"></g>
+    </svg>
+    <gs-generic-visualization-buttons [template]="dt" (reset)="resetToDefault()"></gs-generic-visualization-buttons>
+  </div>
+  <div fxFlex="20%" style="max-height: 100%">
+    <gs-suggestion-list [suggestions]="suggestions" (newSuggestion)="handleNewSuggestion($event)" [newSuggestionActions]="[{action: 'suggest zoom', title: 'Suggest Current Zoom Level'}]" (actions)="processGuidance($event.suggestion, $event.action, userRole)" [userRole]="userRole"></gs-suggestion-list>
+  </div>
+</div>

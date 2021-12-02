@@ -1,0 +1,14 @@
+<ng-template #empty>
+  <div>No suggestions can be linked at the moment. You can only link suggestions from different interface components.</div>
+</ng-template>
+<ng-container *ngIf="suggestions.length > 0; else empty">
+  <div *ngFor="let sugg of suggestions">
+    <mat-checkbox [(ngModel)]="sugg.selected"></mat-checkbox>
+    {{ getReadableName(sugg) }}: {{ sugg.description }}
+  </div>
+</ng-container>
+
+<div>Note: This list does not contain suggestions that have already been linked before. If you want to update your links, recreate the respective suggestions and try again.</div>
+
+<button mat-raised-button (click)="close()">Cancel</button>
+<button mat-raised-button mat-button (click)="link()" [disabled]="suggestions.length === 0">Link</button>

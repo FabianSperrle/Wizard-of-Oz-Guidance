@@ -1,0 +1,20 @@
+<!--<div>-->
+<!--  <mat-toolbar  color="primary">-->
+<!--    <span>Guidance Study</span>-->
+<!--    <span class="example-spacer"></span>-->
+<!--    <span *ngIf="channelService.selectedChannel">-->
+<!--      Channel: {{ channelService.selectedChannel.name }}-->
+<!--      <mat-icon *ngIf="userRoleService.isWizard()">auto_fix_high</mat-icon>-->
+<!--      <mat-icon *ngIf="userRoleService.isUser()">face</mat-icon>-->
+<!--      <button mat-icon-button (click)="disconnect()"><mat-icon>clear</mat-icon></button>-->
+<!--    </span>-->
+<!--  </mat-toolbar>-->
+<!--</div>-->
+
+<!--<gs-channel-manager></gs-channel-manager>-->
+
+<router-outlet></router-outlet>
+
+
+
+<!--<gs-dimpvis *ngIf="this.userRoleService.role == 'wizard' && data"  [width]="1200" [height]="800" [data]="data" [(currYear)]="year" userRole="user"></gs-dimpvis>-->

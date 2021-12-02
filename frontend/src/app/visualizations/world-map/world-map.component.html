@@ -1,0 +1,18 @@
+<ng-template #wt>
+  <h2>World Map</h2>
+  <p>The map allows to you to quickly add/remove all cities from a given continent.</p>
+  <p>Afforded Interactions:</p>
+  <ul>
+    <li><strong>Click a continent</strong> to toggle the visibility of all its cities.</li>
+  </ul>
+</ng-template>
+<div #svgContainer style="position: relative">
+  <svg #map></svg>
+  <gs-generic-visualization-buttons [template]="wt" (reset)="resetToDefault()"></gs-generic-visualization-buttons>
+</div>
+<div>Click on any continent to (de)select it.</div>
+<div><strong>All cities from selected continents will be (re-)added to all views!</strong></div>
+<gs-suggestion-list [suggestions]="suggestions"
+                    [hideTitle]="true"
+                    [newSuggestionActions]="[{action: 'update continents', title: 'Suggest current continent selection'}]" (newSuggestion)="handleNewSuggestion()"
+                    (actions)="processGuidance($event.suggestion, $event.action, userRole)" [userRole]="userRole" [horizontal]="true"></gs-suggestion-list>

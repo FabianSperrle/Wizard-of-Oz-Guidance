@@ -1,0 +1,17 @@
+#suggestionPaneTitle {
+  position: relative;
+
+  #addSuggestion {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    mat-icon {
+      font-size: 1.5em;
+    }
+  }
+}
+
+:host {
+  display: block;
+}

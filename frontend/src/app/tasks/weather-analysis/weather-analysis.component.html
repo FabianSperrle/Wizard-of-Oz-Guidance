@@ -1,0 +1,55 @@
+<div fxLayout="row wrap" fxLayout.xs="column"  fxLayoutAlign="center">
+  <div fxFlex="15%" class="container" style="position: relative">
+    <div *ngIf="userRoleService.isUser() && !this.isOverlay">
+      <h1>Your Tasks</h1>
+      You are planning a vacation with your friends...
+      <gs-task-list [isOverlay]="isOverlay"></gs-task-list>
+    </div>
+    <div *ngIf="userRoleService.isWizard()">
+      <h1>Users Tasks</h1>
+      <div>Please try to support the hypothetical user in their tasks as well as possible.</div>
+      <gs-task-list [isOverlay]="isOverlay"></gs-task-list>
+    </div>
+
+    <div id="condition">
+      {{ channelService.selectedChannel?.name }} -- {{ this.userRoleService.isWizard() ? 'W1' : 'U1'}} {{ studyCondtionService.condition }}
+    </div>
+  </div>
+  <div fxFlex="84%">
+    <div fxLayout="row wrap">
+      <div fxFlex="73%" class="container">
+        <gs-dimpvis [data]="data" *ngIf="date"
+                    [selectedStations]="this.selectedStations"
+                    [currYear]="date" [isOverlay]="this.isOverlay"
+                    [(xAxisDimension)]="xAxisDimension" [(yAxisDimension)]="yAxisDimension" [(colorDimension)]="colorDimension"
+                    [(highlightedIDs)]="this.highlightedIDs"
+        ></gs-dimpvis>
+        <gs-axis-selector [isOverlay]="this.isOverlay" label="y-axis" [(value)]="yAxisDimension" [dimensions]="dimensions"></gs-axis-selector>
+        <gs-axis-selector [isOverlay]="this.isOverlay" label="x-axis" [(value)]="xAxisDimension" [dimensions]="dimensions"></gs-axis-selector>
+        <gs-color-selector [isOverlay]="this.isOverlay" label="Color" [(value)]="colorDimension" [dimensions]="colorDimensions"></gs-color-selector>
+      </div>
+      <div fxFlex="25%" class="container">
+        <gs-world-map [isOverlay]="this.isOverlay" (selectedContinents)="this.selectedContinents = $event" (selectedContinentsPreview)="this.selectedContinentsPreview = $event"></gs-world-map>
+      </div>
+      <div fxFlex="58%">
+        <div class="container">
+          <gs-timeslider *ngIf="minDate" [minYear]="minDate" [maxYear]="maxDate" [(currYear)]="date" [isOverlay]="this.isOverlay"></gs-timeslider>
+        </div>
+        <div class="container" style="margin-top: 10px">
+          <gs-line-chart *ngIf="data"
+                         [data]="data"
+                         [selectedStations]="this.selectedStations"
+                         [yAxisDimension]="yAxisDimensionLineChart"
+                         [colorDimension]="colorDimension"
+                         [isOverlay]="this.isOverlay"
+                         [currYear]="date"
+                         [(highlightedIDs)]="this.highlightedIDs"></gs-line-chart>
+          <gs-axis-selector [isOverlay]="this.isOverlay" label=" y-axis" [(value)]="yAxisDimensionLineChart" [dimensions]="dimensions"></gs-axis-selector>
+        </div>
+      </div>
+      <div fxFlex="41%" class="container" style="position: relative">
+        <gs-station-list [isOverlay]="isOverlay" [measurements]="data" [continents]="selectedContinents" [continentsPreview]="selectedContinentsPreview" (selectedStations)="selectedStations = $event" [highlightedIDs]="highlightedIDs"></gs-station-list>
+      </div>
+    </div>
+  </div>
+</div>

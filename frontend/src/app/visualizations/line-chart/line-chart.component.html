@@ -1,0 +1,26 @@
+<ng-template #tooltip>
+  <h2>Line Chart</h2>
+  <p>This chart should allow you to get an overview of the temporal development of the data. </p>
+  <p>Afforded Interactions:</p>
+  <ul>
+    <li>Select y-axis from dropdown below</li>
+    <li>Hover any of the lines to show additional information.</li>
+    <li>Click and drag to highlight data points.</li>
+  </ul>
+  You can change the color scale using the dropwdown below the scatterplot.
+</ng-template>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" style="height: 345px">
+  <div fxFlex="68%" #svgContainer style="position:relative;">
+    <svg #linechart>
+      <filter id="blur"><feGaussianBlur stdDeviation="2"></feGaussianBlur></filter>
+      <g id="brush"></g>
+      <g id="lines"></g>
+    </svg>
+    <gs-generic-visualization-buttons [template]="tooltip" (reset)="resetToDefault()"></gs-generic-visualization-buttons>
+  </div>
+  <div fxFlex="30%" style="max-height: 100%">
+      <gs-suggestion-list [suggestions]="suggestions"
+                          [newSuggestionActions]=""
+                          (actions)="processGuidance($event.suggestion, $event.action, userRole)" [userRole]="userRole"></gs-suggestion-list>
+  </div>
+</div>

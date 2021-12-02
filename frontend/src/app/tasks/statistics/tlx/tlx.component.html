@@ -1,0 +1,99 @@
+<div class="container">
+  <h2>All Done!</h2>
+  <div>You have completed a set of tasks. In addition to the short feedback you gave after each individual task, please fill out the form below.</div>
+
+
+
+  <div>
+    <h3>Mental Demand</h3>
+    <label class="radio-group-label"><b>How mentally demanding was the task?</b></label>
+    <div>
+      Very Low
+      <mat-radio-group aria-labelledby="radio-group-label" color="primary" [(ngModel)]="mental">
+        <mat-radio-button class="radio-button" [value]=1></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=2></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=3></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=4></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=5></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=6><i></i></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=7></mat-radio-button>
+      </mat-radio-group> Very High
+    </div>
+  </div>
+
+
+  <div>
+    <h3>Temporal Demand</h3>
+    <label class="radio-group-label"><b>How hurried or rushed was the pace of the task?</b></label>
+    <div>
+      Very Low
+      <mat-radio-group aria-labelledby="radio-group-label" color="primary" [(ngModel)]="temporal">
+        <mat-radio-button class="radio-button" [value]=1></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=2></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=3></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=4></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=5></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=6><i></i></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=7></mat-radio-button>
+      </mat-radio-group> Very High
+    </div>
+  </div>
+
+
+  <div>
+    <h3>Performance</h3>
+    <label class="radio-group-label"><b>How successful were you in accomplishing what you were asked to do?</b></label>
+    <div>
+      Perfect
+      <mat-radio-group aria-labelledby="radio-group-label" color="primary" [(ngModel)]="performance">
+        <mat-radio-button class="radio-button" [value]=1></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=2></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=3></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=4></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=5></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=6><i></i></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=7></mat-radio-button>
+      </mat-radio-group> Failure
+    </div>
+  </div>
+
+
+  <div>
+    <h3>Effort</h3>
+    <label class="radio-group-label"><b>How hard did you have to work to accomplish your level of performance?</b></label>
+    <div>
+      Very Low
+      <mat-radio-group aria-labelledby="radio-group-label" color="primary" [(ngModel)]="effort">
+        <mat-radio-button class="radio-button" [value]=1></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=2></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=3></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=4></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=5></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=6><i></i></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=7></mat-radio-button>
+      </mat-radio-group> Very High
+    </div>
+  </div>
+
+
+  <div>
+    <h3>Frustration</h3>
+    <label class="radio-group-label"><b>How insecure, discouraged, irritated, stressed, and annoyed were you? </b></label>
+    <div>
+      Very Low
+      <mat-radio-group aria-labelledby="radio-group-label" color="primary" [(ngModel)]="frustration">
+        <mat-radio-button class="radio-button" [value]=1></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=2></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=3></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=4></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=5></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=6><i></i></mat-radio-button>
+        <mat-radio-button class="radio-button" [value]=7></mat-radio-button>
+      </mat-radio-group> Very High
+    </div>
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+  </div>
+</div>

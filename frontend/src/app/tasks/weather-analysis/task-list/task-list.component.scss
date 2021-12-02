@@ -1,0 +1,51 @@
+::ng-deep {
+  .mat-step-header {
+    pointer-events: none !important;
+  }
+
+  .mat-vertical-content {
+    padding: 0 5px 5px 5px !important;
+  }
+
+  .mat-vertical-content-container {
+    margin-left: 0px !important;
+  }
+
+  .mat-vertical-stepper-header {
+    padding: 8px 0 !important;
+  }
+
+  .mat-stepper-vertical-line::before {
+    border-left-width: 0 !important;
+  }
+}
+
+//.radio-group {
+//  display: flex;
+//  margin: 15px 0;
+//}
+
+.radio-button {
+  margin: 5px;
+}
+
+
+:host {
+  display: block;
+}
+
+#starReminder {
+  margin-top: 10px;
+  color: #2c53d5;
+  font-weight: 500;
+}
+
+#continueWarning {
+  margin-top: 10px;
+  color: #d52c2c;
+  font-weight: 500;
+}
+
+.likerts {
+  margin-top: 10px
+}

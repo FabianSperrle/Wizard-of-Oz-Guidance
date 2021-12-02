@@ -1,0 +1,64 @@
+<ng-template #overlay>
+  <h3>User tasks are not synchronized here.</h3>
+</ng-template>
+<ng-container *ngIf="this.isOverlay === false else overlay">
+  <mat-stepper orientation="vertical" [linear]="true" #stepper>
+    <!--  <mat-step [stepControl]="firstFormGroup">-->
+    <mat-step *ngFor="let task of taskList" [editable]="false">
+      <!--    <form [formGroup]="firstFormGroup">-->
+      <ng-template matStepLabel *ngIf="stepper.selectedIndex == task.id">{{ task.title }}</ng-template>
+      <ng-template matStepLabel *ngIf="stepper.selectedIndex < task.id">Please complete all previous tasks first.
+      </ng-template>
+      <ng-template matStepLabel *ngIf="stepper.selectedIndex > task.id">[Completed] {{ task.title }}</ng-template>
+      <div>{{ task.description }}</div>
+      <div><strong>Goal:</strong> {{ task.goal }}</div>
+      <div *ngIf="this.showLikert">
+        <div *ngIf="pleaseContinueWarning" id="continueWarning">
+          <div *ngIf="this.userRole === 'wizard'">The user has indicated that they have completed their task. Please
+            move on.
+          </div>
+          <div *ngIf="this.userRole === 'user'">The system believes that you have completed this task. Consider moving
+            on.
+          </div>
+        </div>
+        <div id="starReminder">
+          Please make sure that you have removed the stars from all cities that are no longer candidates before continuing!
+        </div>
+        <div class="likerts">
+          <label class="radio-group-label"><b>How would you rate the current task?</b></label>
+          <mat-radio-group aria-labelledby="radio-group-label" color="primary" id="radio-group"
+                           [(ngModel)]="taskDifficulty">
+            <mat-radio-button class="radio-button" [value]=1>Very Difficult</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=2>Difficult</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=3>Okay</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=4>Easy</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=5>Very Easy</mat-radio-button>
+            <!--              <mat-divider [vertical]="true" style="margin-left:20px; "></mat-divider>-->
+            <mat-radio-button class="radio-button" [value]=6><i>No Answer</i></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="likerts">
+          <label class="radio-group-label"><b>How would you rate the provided guidance?</b></label>
+          <mat-radio-group aria-labelledby="radio-group-label" color="primary" class="radio-group"
+                           [(ngModel)]="guidanceQuality">
+            <mat-radio-button class="radio-button" [value]=1>Very Poor</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=2>Poor</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=3>Neutral</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=4>Good</mat-radio-button>
+            <mat-radio-button class="radio-button" [value]=5>Very Good</mat-radio-button>
+            <!--                <mat-divider [vertical]="true" style="margin-left:20px; "></mat-divider>-->
+            <mat-radio-button class="radio-button" [value]=6><i>No Answer</i></mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary"
+                (click)="this.next()">{{ this.showLikert ? "Continue" : "Done" }}</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done. Thanks for participating!</p>
+    </mat-step>
+  </mat-stepper>
+</ng-container>

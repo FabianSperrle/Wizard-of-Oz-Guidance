@@ -1,0 +1,69 @@
+<ng-template #slt>
+  <h2>City List</h2>
+  <p>The city list is your most important dashboard for this task. It allows showing and hiding data points, and also selecting which ones you think are still relevant for the task.</p>
+  <p>Afforded Interactions:</p>
+  <ul>
+    <li><strong>Show/hide</strong> cities from all visualizations by clicking the eye-icon.</li>
+    <li><strong>Star/unstar</strong> cities to indicate that they are (or are not) potential vacation targets.</li>
+    <li>All the buttons below the lists provide <i>convenience functions</i> to change stars and visibilities quickly. They all show documentation on hover.</li>
+  </ul>
+</ng-template>
+<div  fxLayout="row wrap" fxLayoutGap="2%">
+<!--  <div fxFlex="100%">-->
+<!--    <h3>Weather Stations</h3>-->
+<!--  </div>-->
+
+  <div fxFlex="48%">
+    <strong>Visible Cities</strong>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput placeholder="City Name" [(ngModel)]="visibleFilter">
+      <button *ngIf="visibleFilter" matSuffix mat-icon-button aria-label="Clear" (click)="visibleFilter=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint>Enter any (partial) city name to filter the list below.</mat-hint>
+    </mat-form-field>
+    <div #visible class="wrapper" (scroll)="onScroll($event, 'visible')">
+      <div *ngFor="let station of stations | stationfilter:[{prop: 'selected', val: true}] | namefilter:visibleFilter" [ngClass]="{'invisible': !station.selected, 'noCandidate': !isOverlay && !station.candidate, 'highlighted': highlightedIDs.has(station.station)}">
+        <button mat-icon-button (click)="toggleVisibility(station)"><mat-icon>{{ station.selected ? 'visibility' : 'visibility_off' }}</mat-icon></button>
+        <button mat-icon-button *ngIf="!isOverlay" (click)="toggleCandidate(station)"><mat-icon>{{ station.candidate ? 'star' : 'star_border' }}</mat-icon></button>
+        {{ station.station }}
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="48%">
+    <strong>Hidden Cities</strong>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput placeholder="City Name" [(ngModel)]="invisibleFilter">
+      <button *ngIf="invisibleFilter" matSuffix mat-icon-button aria-label="Clear" (click)="invisibleFilter=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint>Enter any (partial) city name to filter the list below.</mat-hint>
+    </mat-form-field>
+    <div #hidden class="wrapper" (scroll)="onScroll($event, 'hidden')">
+      <div *ngFor="let station of stations | stationfilter:[{prop: 'selected', val: false}] | namefilter:invisibleFilter" [ngClass]="{'invisible': !station.selected, 'noCandidate': !isOverlay && !station.candidate}">
+        <button mat-icon-button (click)="toggleVisibility(station)"><mat-icon>{{ station.selected ? 'visibility' : 'visibility_off' }}</mat-icon></button>
+        <button mat-icon-button *ngIf="!isOverlay" (click)="toggleCandidate(station)"><mat-icon>{{ station.candidate ? 'star' : 'star_border' }}</mat-icon></button>
+        {{ station.station }}
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="100%" class="buttons">
+    <button mat-raised-button (click)="showAll()" matTooltip="Show all cities in all plots"><mat-icon>visibility</mat-icon></button>
+    <button mat-raised-button (click)="hideAll()" matTooltip="Hide all cities in all plots"><mat-icon>visibility_off</mat-icon></button>
+    <button mat-raised-button (click)="starAll()" matTooltip="Select all cities as potential vacation targets"><mat-icon>star</mat-icon></button>
+    <button mat-raised-button (click)="starNone()" matTooltip="Select no cities as potential vacation targets"><mat-icon>star_border</mat-icon></button>
+    <button mat-raised-button (click)="hideHighlighted()" matTooltip="Hide all cities that are currently highlighted in yellow."><mat-icon style="color: yellow">highlight</mat-icon>-><mat-icon>visibility_off</mat-icon></button>
+    <button mat-raised-button (click)="hideNotHighlighted()" matTooltip="Hide all cities that are currently NOT highlighted in yellow."><mat-icon>highlight</mat-icon>-><mat-icon>visibility_off</mat-icon></button>
+    <button mat-raised-button (click)="makeStarsVisible()" matTooltip="Add all potential targets to all plots"><mat-icon>star</mat-icon>-><mat-icon>visibility</mat-icon></button>
+    <button mat-raised-button (click)="starVisibles()" matTooltip="Select all plotted cities as potential targets"><mat-icon>visibility</mat-icon>-><mat-icon>star</mat-icon></button>
+    <button mat-raised-button (click)="invisibleNoStar()" matTooltip="Make all invisible cities no longer targets"><mat-icon>visibility_off</mat-icon>-><mat-icon>star_border</mat-icon></button>
+    <button mat-raised-button (click)="noStarInvisible()" matTooltip="Hide all cities that are not currently potential targets"><mat-icon>star_border</mat-icon>-><mat-icon>visibility_off</mat-icon></button>
+  </div>
+
+  <gs-generic-visualization-buttons [showReset]="false" [template]="slt"></gs-generic-visualization-buttons>
+</div>
+

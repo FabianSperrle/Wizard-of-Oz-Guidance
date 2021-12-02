@@ -1,0 +1,16 @@
+.container {
+  box-shadow: 0 1px 2px #00000033;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 5px;
+  background: white;
+}
+
+:host {
+  display: block;
+}
+
+#condition {
+  position: absolute;
+  bottom: 5px;
+}

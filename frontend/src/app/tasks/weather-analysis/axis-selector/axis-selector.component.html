@@ -1,0 +1,16 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{label}}</mat-label>
+  <mat-select [ngModel]="value" (selectionChange)="selectAxis($event.value)">
+    <mat-option *ngFor="let dimension of dimensions" [value]="dimension">
+      {{ dimension }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<div style="display: inline-block; max-width: 200px">
+  <gs-suggestion-list [hideTitle]="true"
+                      [suggestions]="suggestions"
+                      [newSuggestionActions]="[{action: 'axis select', title: 'Suggest current axis'}]" (newSuggestion)="handleNewSuggestion($event)"
+                      (actions)="processGuidance($event.suggestion, $event.action, userRole)" [userRole]="userRole" [horizontal]="true"></gs-suggestion-list>
+</div>

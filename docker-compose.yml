@@ -1,0 +1,59 @@
+version: '3.7'
+
+volumes:
+  guidance_redis-data:
+    name: guidance_redis-data
+    external: false
+
+services:
+  backend:
+    container_name: guidance-learning-backend
+    image: guidance-learning-backend:latest
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - "8082:80"
+    volumes:
+      - ./backend/app:/app
+    entrypoint: "/start-reload.sh"
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MAX_WORKERS=1
+      - GUNICORN_CMD_ARGS="--reload"
+
+  frontend:
+    container_name: guidance-frontend
+    image: guidance-frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+    - '4210:4200'
+    - '49153:49153'
+    volumes:
+    - ./frontend:/usr/src/app
+    environment:
+      - NODE_ENV=dev
+    profiles:
+      - frontend
+
+  db:
+    image: bitnami/postgresql:13.5.0
+    env_file:
+      - .env
+    volumes:
+      - ./database:/bitnami/postgresql
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer:4.8.1
+    env_file:
+      - .env
+    ports:
+      - 8020:8080
+    depends_on:
+      - db

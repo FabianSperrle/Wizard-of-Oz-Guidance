@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  max-width: 1820px;
+  max-height: 1000px;
+  background: #f0f2f5;
+  overflow: auto;
+}
+
+.userViewOverlay {
+  pointer-events: none !important;
+}
+
+snack-bar-container {
+  pointer-events: all;
+}
+
+.resetButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

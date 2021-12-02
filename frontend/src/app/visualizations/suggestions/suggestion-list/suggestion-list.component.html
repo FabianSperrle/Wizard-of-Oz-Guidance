@@ -1,0 +1,23 @@
+<!--<ng-template #noSuggestions>-->
+<!--  Currently no suggestions.-->
+<!--</ng-template>-->
+<!--<ng-container *ngIf="suggestions.length > 0 else noSuggestions">-->
+<!--  <gs-dimpvis-suggestion-card *ngFor="let sugg of suggestions" [suggestion]="sugg" (feedback)="actions.emit({suggestion: sugg, action: $event})"></gs-dimpvis-suggestion-card>-->
+<!--</ng-container>-->
+<div class="suggestions" [ngClass]="{'horizontal': horizontal, 'vertical': !horizontal}">
+  <div id="suggestionPaneTitle">
+    <h3 *ngIf="!hideTitle">Suggestions</h3>
+    <ng-container *ngIf="userRole != 'user' && newSuggestionActions">
+      <button  id="addSuggestion" mat-icon-button [matMenuTriggerFor]="addMenu"><mat-icon>add_circle_outline</mat-icon></button>
+      <mat-menu #addMenu="matMenu">
+            <button *ngFor="let pair of newSuggestionActions" mat-menu-item (click)="newSuggestion.emit(pair.action)">{{ pair.title }}</button>
+      </mat-menu>
+    </ng-container>
+  </div>
+  <ng-template #noSuggestions>
+    Currently no suggestions.
+  </ng-template>
+  <ng-container *ngIf="suggestions.length > 0 else noSuggestions">
+    <gs-dimpvis-suggestion-card *ngFor="let sugg of suggestions" [suggestion]="sugg" (feedback)="actions.emit({suggestion: sugg, action: $event})" [role]="userRole"></gs-dimpvis-suggestion-card>
+  </ng-container>
+</div>

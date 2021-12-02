@@ -1,0 +1,4 @@
+<div class="resetButton" #tooltipOrigin>
+  <button matTooltip="Help and additional information" mat-icon-button (click)="openTooltip()"><mat-icon>help_outline</mat-icon></button>
+  <button *ngIf="showReset" mat-icon-button matTooltip="Reset visualization to default configuration" (click)="reset.emit()"><mat-icon>restart_alt</mat-icon></button>
+</div>
